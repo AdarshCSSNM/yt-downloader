@@ -4,6 +4,7 @@ import os
 import tempfile
 import re
 import time
+import imageio_ffmpeg
 
 # --- UI Configuration ---
 st.set_page_config(
@@ -46,11 +47,13 @@ if st.button("Get Video"):
 
                 # Create a temporary directory to store the file
                 with tempfile.TemporaryDirectory() as tmpdir:
+                    ffmpeg_location = imageio_ffmpeg.get_ffmpeg_exe()
                     ydl_opts = {
                         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
                         'noplaylist': True,
                         'progress_hooks': [progress_hook],
                         'outtmpl': os.path.join(tmpdir, '%(title)s.%(ext)s'),
+                        'ffmpeg_location': ffmpeg_location,
                     }
 
                     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
