@@ -4,7 +4,6 @@ import os
 import tempfile
 import re
 import time
-import imageio_ffmpeg
 
 # --- UI Configuration ---
 st.set_page_config(
@@ -48,7 +47,7 @@ if st.button("Get Video"):
                 # Create a temporary directory to store the file
                 with tempfile.TemporaryDirectory() as tmpdir:
                     ydl_opts = {
-                        'format': 'best[ext=mp4][vcodec^=avc1][acodec^=mp4a.40.2]/best[ext=mp4]/best',
+                        'format': '22',
                         'noplaylist': True,
                         'progress_hooks': [progress_hook],
                         'outtmpl': os.path.join(tmpdir, '%(title)s.%(ext)s'),
