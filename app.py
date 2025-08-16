@@ -54,6 +54,9 @@ if st.button("Get Video"):
                         'progress_hooks': [progress_hook],
                         'outtmpl': os.path.join(tmpdir, '%(title)s.%(ext)s'),
                         'ffmpeg_location': ffmpeg_location,
+                        'http_headers': {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+                        },
                     }
 
                     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
