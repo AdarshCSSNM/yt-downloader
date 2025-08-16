@@ -47,16 +47,11 @@ if st.button("Get Video"):
 
                 # Create a temporary directory to store the file
                 with tempfile.TemporaryDirectory() as tmpdir:
-                    ffmpeg_location = imageio_ffmpeg.get_ffmpeg_exe()
                     ydl_opts = {
-                        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+                        'format': 'best[ext=mp4][vcodec^=avc1][acodec^=mp4a.40.2]/best[ext=mp4]/best',
                         'noplaylist': True,
                         'progress_hooks': [progress_hook],
                         'outtmpl': os.path.join(tmpdir, '%(title)s.%(ext)s'),
-                        'ffmpeg_location': ffmpeg_location,
-                        'http_headers': {
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-                        },
                     }
 
                     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
